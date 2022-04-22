@@ -6,6 +6,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const width = 10; //Width of the grid
     let nextRandom = 0
     let timerID
+    let score = 0
+    let isPaused = 0
+    const colors = [
+        'orange',
+        'red',
+        'purple',
+        'green',
+        'blue'
+    ]
     
     //The Tetrominoes
     const lTetromino = [
@@ -57,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function draw(){
         current.forEach(index => {
             squares[currentPosition + index].classList.add('tetromino')
+            squares[currentPosition + index].style.backgroundColor = colors[random]
         })
     }
 
@@ -64,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function undraw(){
         current.forEach(index => {
             squares[currentPosition + index].classList.remove('tetromino')
+            squares[currentPosition + index].style.backgroundColor = ''
         })
     }
 
@@ -107,6 +118,8 @@ document.addEventListener('DOMContentLoaded', () => {
             currentPosition = 4
             draw()
             displayShape()
+            addScore()
+            gameOver()
         }
     }
 
@@ -151,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //show up-next tetromino in mini-grid
     const displaySquares = document.querySelectorAll('.mini-grid div')
     const displayWidth = 4
-    let displayIndex = 0
+    const displayIndex = 0
 
     //the Tetrominoes without rotations
     const upNextTetrominoes = [
@@ -166,23 +179,64 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayShape(){
         displaySquares.forEach(square => {
             square.classList.remove('tetromino')
+            square.style.backgroundColor = ''
         })
         upNextTetrominoes[nextRandom].forEach(index => {
             displaySquares[displayIndex + index].classList.add('tetromino')
+            displaySquares[displayIndex + index].style.backgroundColor = colors[nextRandom]
         })
     }
 
     //add functionality to the button
     startBtn.addEventListener('click', () =>{
-        if (timerID){
+        if (timerID){ //Pause
             clearInterval(timerID)
             timerID = null
+            isPaused = 1
+            displayShape()
+            document.getElementById('startButton').innerHTML = "Resume"
         }
-        else{
+        else if(isPaused){ //Resume
+            draw()
+            timerID = setInterval(moveDown, 500)
+            displayShape()
+            document.getElementById('startButton').innerHTML = "Pause"
+        }
+        else{ //Start
             draw()
             timerID = setInterval(moveDown, 500)
             nextRandom = Math.floor(Math.random()*theTetrominoes.length)
             displayShape()
+            document.getElementById('startButton').innerHTML = "Pause"
         }
     })
+
+    function addScore(){
+        for (let i = 0; i < 199; i += width){
+            const row = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9]
+            
+            if (row.every(index => squares[index].classList.contains('taken'))){
+                score += 10
+                scoreDisplay.innerHTML = score
+                //For each square in the row, we remove the class 'taken'
+                row.forEach(index => {
+                    squares[index].classList.remove('taken')
+                    squares[index].classList.remove('tetromino')
+                    squares[index].style.backgroundColor = ''
+                })
+                const squaresRemoved = squares.splice(i, width)
+                squares = squaresRemoved.concat(squares)
+                squares.forEach(cell => grid.appendChild(cell))
+            }
+        }
+    }
+
+    function gameOver() {
+        if(current.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+          scoreDisplay.innerHTML = 'Game Over'
+          clearInterval(timerID)
+          isPaused = 0 //maybe?
+          document.getElementById('startButton').innerHTML = "Start"
+        }
+      }
 })

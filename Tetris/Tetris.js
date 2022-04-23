@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0
     let isPaused = 0
     const colors = [
-        'orange',
-        'red',
-        'purple',
-        'green',
-        'blue'
+        '#800080', //Purple
+        '#4CBB17', //Green
+        '#FFAC1C', //Orange
+        '#FAFA33', //Yellow
+        '#EE4B2B' //Red
     ]
     
     //The Tetrominoes
@@ -163,16 +163,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //show up-next tetromino in mini-grid
     const displaySquares = document.querySelectorAll('.mini-grid div')
-    const displayWidth = 4
+    const displayWidth = 5
     const displayIndex = 0
 
     //the Tetrominoes without rotations
     const upNextTetrominoes = [
-        [1, displayWidth+1, displayWidth*2+1, 2], //lTetromino
-        [displayWidth+1, displayWidth+2, displayWidth*2, displayWidth*2+1], //zTetromino
-        [1, displayWidth, displayWidth+1, displayWidth+2], //tTetromino
-        [0, 1, displayWidth, displayWidth+1], //oTetromino
-        [1, displayWidth+1, displayWidth*2+1, displayWidth*3+1] //iTetromino
+        [7, 8, 12, 17],
+        [12, 13, 16, 17],
+        [7, 11, 12, 13],
+        [6, 7, 11, 12],
+        [2, 7, 12, 17],
     ]
 
     //display the shape in the mini-grid display

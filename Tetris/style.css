@@ -1,34 +1,48 @@
 .container{
     display: flex;
+    justify-content: center;
+	align-items: center;
 }
 
 .grid{
-    width: 200px;
-    height: 400px;
+    width: 300px;
+    height: 600px;
     display: flex;
     flex-wrap: wrap;
-    background-color: #00FFFF;
+    background-color: #008080;
+    border: 1px solid white;
 }
 
 .grid div{
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
 }
 
-.tetromino {
+/* .tetromino {
     background-color: orange;
-}
+} */
 
 .mini-grid{
-    width: 80px;
-    height: 80px;
+    width: 150px;
+    height: 150px;
     display: flex;
     flex-wrap: wrap;
-    background-color: #00FFFF;
-    margin-left: 50px;
+    background-color: #008080;
 }
 
 .mini-grid div{
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
+}
+
+.sideBarContainer{
+    margin-left: 50px;  
+    text-align: center;
+    border: 1px solid white;
+    padding: 10px;
+    background-color: #008080;
+}
+
+.startButton{
+    background-color: #9FE2BF;
 }

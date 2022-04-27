@@ -41,8 +41,8 @@ while(1):
 
     if (newPosts):
         val = input("Enter 'y' to open webpage(s).")
-        for link in webpage_links:
-            if (val == "y"):
+        if (val == "y"):
+            for link in webpage_links:
                 webbrowser.open(link)
     
     time.sleep(60) #Waits 60 seconds

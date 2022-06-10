@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
 .container{
     display: flex;
     justify-content: center;
@@ -18,6 +23,16 @@
     width: 30px;
 }
 
+.header{
+    height: 8vh;
+    width: 100%;
+    background-color:#008080;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 4vh;
+}
+
 /* .tetromino {
     background-color: orange;
 } */
@@ -36,13 +51,23 @@
 }
 
 .sideBarContainer{
-    margin-left: 50px;  
+    margin-left: 4vh;  
     text-align: center;
     border: 1px solid white;
     padding: 10px;
     background-color: #008080;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
 
 .startButton{
     background-color: #9FE2BF;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    font-size: 16px;
+}
+
+.title{
+    text-align: center;
+    padding: 2vh;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    font-size: 32px;
 }
